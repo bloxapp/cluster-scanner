@@ -52,13 +52,6 @@ Help on available actions:
 yarn cli --help
 ```
 
-Help on a specific action:
-
-```bash
-yarn cli <action> --help
-```
-
-
 ### Example
 
 **Input parameters:**
