@@ -1,15 +1,15 @@
 {
-  "name": "ssv-scanner",
+  "name": "cluster-scanner",
   "version": "0.0.1",
-  "description": "Library to find the latest validators pod snapshot in the SSV Contract.",
+  "description": "Library to find the latest validators cluster snapshot in the SSV Contract.",
   "author": "SSV.Network",
-  "repository": "https://github.com/bloxapp/ssv-scanner",
+  "repository": "https://github.com/bloxapp/cluster-scanner",
   "license": "MIT",
   "keywords": [
     "ssv",
     "ssv.network",
-    "keystore",
-    "shares"
+    "cluster",
+    "scanner"
   ],
   "main": "./dist/tsc/src/main.js",
   "types": "./dist/tsc/src/main.d.ts",
