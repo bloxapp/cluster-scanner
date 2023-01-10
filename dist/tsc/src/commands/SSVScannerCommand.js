@@ -2,10 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SSVScannerCommand = void 0;
 const tslib_1 = require("tslib");
-const argparse_1 = require("argparse");
 const web3_provider_1 = tslib_1.__importDefault(require("../lib/web3.provider"));
 class SSVScannerCommand {
-    constructor() {
+    constructor(params_) {
         this.DAY = 5400;
         this.WEEK = this.DAY * 7;
         this.MONTH = this.DAY * 30;
@@ -17,44 +16,12 @@ class SSVScannerCommand {
             'ClusterLiquidated',
             'ClusterReactivated',
         ];
-        const parser = new argparse_1.ArgumentParser();
-        parser.add_argument('-n', '--node-url', {
-            help: `The ETH1 node url.`,
-            required: true,
-            dest: 'nodeUrl'
-        });
-        parser.add_argument('-ca', '--ssv-contract-address', {
-            help: 'The SSV Contract address, used to find the latest cluster data snapshot. ' +
-                'Refer to https://docs.ssv.network/developers/smart-contracts',
-            required: true,
-            dest: 'contractAddress'
-        });
-        parser.add_argument('-oa', '--owner-address', {
-            help: "The liquidator's recipient address private key, used for creating a liquidation transaction",
-            required: true,
-            dest: 'ownerAddress'
-        });
-        parser.add_argument('-oids', '--operator-ids', {
-            help: `Comma-separated list of operators IDs from the contract in the same sequence as you provided operators itself`,
-            required: true,
-            dest: 'operatorIds'
-        });
-        this.params = parser.parse_args();
-        this.params.operatorIds = this.params.operatorIds.split(',')
-            .map((value) => {
-            if (Number.isNaN(+value))
-                throw new Error('Operator Id should be the number');
-            return +value;
-        });
-        // this.subParserOptions.help += 'Example: "ssv-scanner key-shares --help" or "ssv-keys ksh --help"'
+        this.params = params_;
     }
     execute() {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const cluster = yield this.getClusterSnapshot(this.MONTH, yield web3_provider_1.default.web3(this.params.nodeUrl).eth.getBlockNumber());
-            return {
-                params: Object.assign({}, this.params),
-                cluster: JSON.stringify(cluster),
-            };
+            return JSON.stringify(cluster);
         });
     }
     getClusterSnapshot(range, toBlock) {

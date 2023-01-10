@@ -4,7 +4,7 @@ export declare class SSVScannerCommand {
     protected MONTH: number;
     protected eventsList: string[];
     private params;
-    constructor();
+    constructor(params_: any);
     execute(): Promise<any>;
     getClusterSnapshot(range: any, toBlock: any): Promise<any>;
 }

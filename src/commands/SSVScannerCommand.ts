@@ -1,5 +1,3 @@
-import { ArgumentParser } from 'argparse';
-
 import Web3Provider from '../lib/web3.provider';
 
 export class SSVScannerCommand {
@@ -18,48 +16,13 @@ export class SSVScannerCommand {
 
   private params: any;
 
-  constructor() {
-    const parser = new ArgumentParser();
-
-    parser.add_argument('-n', '--node-url', {
-      help: `The ETH1 node url.`,
-      required: true,
-      dest: 'nodeUrl'
-    });
-    parser.add_argument('-ca', '--ssv-contract-address', {
-      help:
-        'The SSV Contract address, used to find the latest cluster data snapshot. ' +
-        'Refer to https://docs.ssv.network/developers/smart-contracts',
-      required: true,
-      dest: 'contractAddress'
-    });
-    parser.add_argument('-oa', '--owner-address', {
-      help: "The liquidator's recipient address private key, used for creating a liquidation transaction",
-      required: true,
-      dest: 'ownerAddress'
-    });
-    parser.add_argument('-oids', '--operator-ids', {
-      help: `Comma-separated list of operators IDs from the contract in the same sequence as you provided operators itself`,
-      required: true,
-      dest: 'operatorIds'
-    });
-
-    this.params = parser.parse_args();
-    this.params.operatorIds = this.params.operatorIds.split(',')
-      .map((value: any) => {
-        if (Number.isNaN(+value)) throw new Error('Operator Id should be the number');
-        return +value;
-      });
-    // this.subParserOptions.help += 'Example: "ssv-scanner key-shares --help" or "ssv-keys ksh --help"'
+  constructor(params_: any) {
+    this.params = params_;
   }
 
   async execute(): Promise<any> {
     const cluster = await this.getClusterSnapshot(this.MONTH, await Web3Provider.web3(this.params.nodeUrl).eth.getBlockNumber());
-
-    return {
-      params: { ...this.params },
-      cluster: JSON.stringify(cluster),
-    };
+    return JSON.stringify(cluster);
   }
 
   async getClusterSnapshot(range: any, toBlock: any): Promise<any> {
