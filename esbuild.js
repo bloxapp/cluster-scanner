@@ -6,12 +6,12 @@ const options = {
   tsconfig: 'tsconfig.json',
   logLevel: "info",
   entryPoints: [
-    "src/main.ts"
+    "src/cli.ts"
   ],
   platform: 'browser',
   minify: true,
   bundle: true,
-  outfile: "dist/esbuild/main.js",
+  outfile: "dist/esbuild/cli.js",
   sourcemap: "external",
   plugins: [
     nodeExternalsPlugin({}),

@@ -18,6 +18,7 @@
   },
   "scripts": {
     "dev:cli": "ts-node src/cli.ts",
+    "cli": "node ./dist/tsc/src/cli.js",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "clean": "rm -rf dist build package",
     "ts-node": "ts-node",
