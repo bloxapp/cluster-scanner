@@ -34,12 +34,13 @@ Once you have installed NodeJS, follow instructions:
 ```bash
 git clone https://github.com/bloxapp/cluster-scanner.git
 cd cluster-scanner
-npm run cli --help
+npm i yarn -g
+yarn cli --help
 ```
 
 ### Running from repository
 
-- For regular CLI usage you will be running the command as: `npm run cli ...`
+- For regular CLI usage you will be running the command as: `yarn cli ...`
 - Follow [installation](#Installation) instructions.
 
 
@@ -48,13 +49,13 @@ npm run cli --help
 Help on available actions:
 
 ```bash
-npm run cli --help
+yarn cli --help
 ```
 
 Help on a specific action:
 
 ```bash
-npm run cli <action> --help
+yarn cli <action> --help
 ```
 
 
@@ -68,7 +69,7 @@ npm run cli <action> --help
 - operator-ids (oids) = Comma separated operator ids list
 
 ```bash
-npm run cli -n .... -ca .... -oa ..... -oids=1,2,3,4
+yarn cli -n .... -ca .... -oa ..... -oids=1,2,3,4
 ```
 
 **Output:**  serialised cluster data
@@ -135,7 +136,7 @@ yarn build-all
 
 ## Authors
 
-* [Wadym](https://github.com/vadiminc)
+* [Wadym Ciumac](https://github.com/vadiminc)
 
 ## License
 

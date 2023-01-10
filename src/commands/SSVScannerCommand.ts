@@ -54,11 +54,11 @@ export class SSVScannerCommand {
   }
 
   async execute(): Promise<any> {
-    const pod = await this.getClusterSnapshot(this.MONTH, await Web3Provider.web3(this.params.nodeUrl).eth.getBlockNumber());
+    const cluster = await this.getClusterSnapshot(this.MONTH, await Web3Provider.web3(this.params.nodeUrl).eth.getBlockNumber());
 
     return {
       params: { ...this.params },
-      pod: JSON.stringify(pod),
+      cluster: JSON.stringify(cluster),
     };
   }
 
