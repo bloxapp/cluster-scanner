@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
+    "start:js": "node example-js.js",
     "start": "ts-node example-typescript.ts"
   },
   "author": "SSV.Network",

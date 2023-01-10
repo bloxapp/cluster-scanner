@@ -1,4 +1,4 @@
-import { SSVScannerCommand } from 'cluster-scanner';
+const { SSVScannerCommand } = require('cluster-scanner');
 
 async function main() {
   const params = {
