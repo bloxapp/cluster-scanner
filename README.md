@@ -1,7 +1,6 @@
 # Cluster Scanner
 
 ![GitHub](https://img.shields.io/github/license/bloxapp/cluster-scanner)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bloxapp/cluster-scanner/Lint%20and%20test)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/bloxapp/cluster-scanner)
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/bloxapp/cluster-scanner)
