@@ -1,5 +1,12 @@
 import Web3Provider from '../lib/web3.provider';
 
+export interface SSVScannerParams {
+  nodeUrl: string,
+  ownerAddress: string,
+  contractAddress: string,
+  operatorIds: number[],
+}
+
 export class SSVScannerCommand {
   protected DAY = 5400;
   protected WEEK = this.DAY * 7;
@@ -14,9 +21,9 @@ export class SSVScannerCommand {
     'ClusterReactivated',
   ]
 
-  private params: any;
+  private params: SSVScannerParams;
 
-  constructor(params_: any) {
+  constructor(params_: SSVScannerParams) {
     this.params = params_;
   }
 
