@@ -18,8 +18,8 @@ Important dependencies:
 
 ---
 
-Library and CLI to work with the cluster scanner:
-1. Retrieve the latest validators cluster snapshot from the blockchain
+Repo contains cluster scanner library and CLI.
+It is used to retrieve the latest cluster snapshot from the blockchain.
 
 ## Running from the CLI
 
@@ -28,22 +28,20 @@ Library and CLI to work with the cluster scanner:
 This installation requires NodeJS on your machine.
 You can download it [here](https://nodejs.org/en/download/).
 
-Once you have installed NodeJS, follow instructions:
+Once you have installed NodeJS, follow these instructions to prepare the project:
 
 ```bash
 git clone https://github.com/bloxapp/cluster-scanner.git
 cd cluster-scanner
 npm i yarn -g
+yarn
 yarn cli --help
 ```
 
-### Running from repository
-
-- For regular CLI usage you will be running the command as: `yarn cli ...`
-- Follow [installation](#Installation) instructions.
+### Running as a CLI from the repository
 
 
-### Help
+#### Help
 
 Help on available actions:
 
@@ -51,7 +49,7 @@ Help on available actions:
 yarn cli --help
 ```
 
-### Example
+#### Example
 
 **Input parameters:**
 
@@ -60,11 +58,12 @@ yarn cli --help
 - owner-address (op) = Cluster owner address
 - operator-ids (oids) = Comma separated operator ids list
 
+Example of running in the CLI:
 ```bash
 yarn cli -n .... -ca .... -oa ..... -oids=1,2,3,4
 ```
 
-**Output:**  serialised cluster data
+**Output:**  Latest cluster data (serialized).
 
 ## Integration in your projects
 
