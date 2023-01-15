@@ -60,7 +60,7 @@ yarn cli --help
 
 Example of running in the CLI:
 ```bash
-yarn cli -n .... -ca .... -oa ..... -oids=1,2,3,4
+yarn cli -n .... -ca .... -oa ..... -oids 1,2,3,4
 ```
 
 **Output:**  Latest cluster data (serialized).
