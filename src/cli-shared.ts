@@ -31,12 +31,12 @@ export default async function main(): Promise<any> {
     dest: 'contractAddress'
   });
   parser.add_argument('-oa', '--owner-address', {
-    help: "The owner address of the cluster that you want to query",
+    help: "The owner address regarding the cluster that you want to query",
     required: true,
     dest: 'ownerAddress'
   });
   parser.add_argument('-oids', '--operator-ids', {
-    help: `Comma-separated list of operators IDs of the cluster that you want to query`,
+    help: `Comma-separated list of operators IDs regarding the cluster that you want to query`,
     required: true,
     dest: 'operatorIds'
   });
