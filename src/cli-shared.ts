@@ -31,12 +31,12 @@ export default async function main(): Promise<any> {
     dest: 'contractAddress'
   });
   parser.add_argument('-oa', '--owner-address', {
-    help: "The liquidator's recipient address private key, used for creating a liquidation transaction",
+    help: "The owner address regarding the cluster that you want to query",
     required: true,
     dest: 'ownerAddress'
   });
   parser.add_argument('-oids', '--operator-ids', {
-    help: `Comma-separated list of operators IDs from the contract in the same sequence as you provided operators itself`,
+    help: `Comma-separated list of operators IDs regarding the cluster that you want to query`,
     required: true,
     dest: 'operatorIds'
   });
