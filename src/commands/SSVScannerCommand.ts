@@ -13,7 +13,7 @@ export class SSVScannerCommand {
   protected MONTH = this.DAY * 30;
 
   protected eventsList = [
-    'ClusterDeposit',
+    'ClusterDeposited',
     'ClusterWithdrawn',
     'ValidatorRemoved',
     'ValidatorAdded',
@@ -43,12 +43,11 @@ export class SSVScannerCommand {
 
     let result = [];
     try {
-      // console.log("???", filters.fromBlock, filters.toBlock);
       if (filters.fromBlock <= 0) return null;
       result = await Web3Provider.contract(this.params.nodeUrl, this.params.contractAddress).getPastEvents('allEvents', filters);
     } catch(e) {
       console.error(e);
-      let step;
+      let step: any;
       if (range === this.MONTH) {
         step = this.WEEK;
       } else if (range === this.WEEK) {
