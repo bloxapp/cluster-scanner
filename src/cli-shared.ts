@@ -41,6 +41,7 @@ export default async function main(): Promise<any> {
     dest: 'operatorIds'
   });
 
+  
   const messageText = `SSV Scanner v${pkg.version}`;
   const message = await FigletMessage(messageText);
   if (message) {
@@ -62,7 +63,10 @@ export default async function main(): Promise<any> {
       });
 
     const command = new SSVScannerCommand(params);
-    console.debug(await command.execute());
+    const result = await command.execute();
+    console.table(result.payload);
+    console.log('\CLuster snapshot:');
+    console.table(result.cluster);
   } catch (e: any) {
     console.error('\x1b[31m', e.message);
   }

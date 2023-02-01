@@ -8,7 +8,7 @@ async function main() {
     operatorIds: [],
   }
   const command = new SSVScannerCommand(params);
-  console.log('cluster snapshot:', await command.execute());
+  console.log('Result:', await command.scan());
 }
 
 void main();

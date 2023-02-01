@@ -30,12 +30,12 @@ function main() {
             dest: 'contractAddress'
         });
         parser.add_argument('-oa', '--owner-address', {
-            help: "The liquidator's recipient address private key, used for creating a liquidation transaction",
+            help: "The owner address regarding the cluster that you want to query",
             required: true,
             dest: 'ownerAddress'
         });
         parser.add_argument('-oids', '--operator-ids', {
-            help: `Comma-separated list of operators IDs from the contract in the same sequence as you provided operators itself`,
+            help: `Comma-separated list of operators IDs regarding the cluster that you want to query`,
             required: true,
             dest: 'operatorIds'
         });
@@ -59,7 +59,10 @@ function main() {
                 return +value;
             });
             const command = new SSVScannerCommand_1.SSVScannerCommand(params);
-            console.debug(yield command.execute());
+            const result = yield command.execute();
+            console.table(result.payload);
+            console.log('\CLuster snapshot:');
+            console.table(result.cluster);
         }
         catch (e) {
             console.error('\x1b[31m', e.message);
