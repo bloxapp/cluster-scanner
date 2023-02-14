@@ -1,4 +1,4 @@
-const { SSVScannerCommand } = require('cluster-scanner');
+const { SSVScannerCommand } = require('../src/main');
 
 async function main() {
   const params = {
