@@ -66,7 +66,7 @@ function main() {
 console.log(`"raw": {
     "block": ${result.payload.Block},
     "cluster snapshot": ${JSON.stringify(result.cluster, null, "\t")},
-    "cluster": [${result.cluster.validatorCount},${result.cluster.networkFee},${result.cluster.networkFeeIndex},${result.cluster.index},${result.cluster.balance},${result.cluster.disabled}]
+    "cluster": [${Object.values(result.cluster)}]
 }`);
         }
         catch (e) {

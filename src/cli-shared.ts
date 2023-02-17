@@ -70,7 +70,7 @@ export default async function main(): Promise<any> {
 console.log(`"raw": {
   "block": ${result.payload.Block},
   "cluster snapshot": ${JSON.stringify(result.cluster, null, "\t")},
-  "cluster": [${result.cluster.validatorCount},${result.cluster.networkFee},${result.cluster.networkFeeIndex},${result.cluster.index},${result.cluster.balance},${result.cluster.disabled}]
+  "cluster": [${Object.values(result.cluster)}]
 }`);
   } catch (e: any) {
     console.error('\x1b[31m', e.message);
