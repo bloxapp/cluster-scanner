@@ -42,7 +42,7 @@ export default async function main(): Promise<any> {
   });
 
   
-  const messageText = `SSV Scanner v${pkg.version}`;
+  const messageText = `Cluster Scanner`;
   const message = await FigletMessage(messageText);
   if (message) {
     console.log(' -----------------------------------------------------------------------------------');

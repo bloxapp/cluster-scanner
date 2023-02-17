@@ -1,4 +1,4 @@
-const { SSVScannerCommand } = require('cluster-scanner');
+const { SSVScannerCommand } = require('../dist/tsc/src/commands/SSVScannerCommand');
 
 async function main() {
   const params = {
@@ -8,7 +8,12 @@ async function main() {
     operatorIds: [],
   }
   const command = new SSVScannerCommand(params);
-  console.log('Result:', await command.scan());
+  const result = await command.scan()
+  console.log(`{
+    "block": ${result.payload.Block},
+    "cluster snapshot": ${JSON.stringify(result.cluster, null, "\t")},
+    "cluster": [${result.cluster.validatorCount},${result.cluster.networkFee},${result.cluster.networkFeeIndex},${result.cluster.index},${result.cluster.balance},${result.cluster.disabled}]
+}`);
 }
 
 void main();

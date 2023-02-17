@@ -19,27 +19,27 @@ function main() {
     return tslib_1.__awaiter(this, void 0, void 0, function* () {
         const parser = new argparse_1.ArgumentParser();
         parser.add_argument('-n', '--node-url', {
-            help: `The ETH1 node url.`,
+            help: `ETH1 (execution client) node endpoint url`,
             required: true,
             dest: 'nodeUrl'
         });
         parser.add_argument('-ca', '--ssv-contract-address', {
-            help: 'The SSV Contract address, used to find the latest cluster data snapshot. ' +
+            help: 'SSV contract address - see https://docs.ssv.network/developers/smart-contracts' +
                 'Refer to https://docs.ssv.network/developers/smart-contracts',
             required: true,
             dest: 'contractAddress'
         });
         parser.add_argument('-oa', '--owner-address', {
-            help: "The owner address regarding the cluster that you want to query",
+            help: "The cluster owner address (in the SSV contract)",
             required: true,
             dest: 'ownerAddress'
         });
         parser.add_argument('-oids', '--operator-ids', {
-            help: `Comma-separated list of operators IDs regarding the cluster that you want to query`,
+            help: `Comma-separated list of operator IDs of the cluster`,
             required: true,
             dest: 'operatorIds'
         });
-        const messageText = `SSV Scanner v${package_json_1.default.version}`;
+        const messageText = `Cluster Scanner`;
         const message = yield FigletMessage(messageText);
         if (message) {
             console.log(' -----------------------------------------------------------------------------------');
