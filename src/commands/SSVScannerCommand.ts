@@ -95,7 +95,7 @@ export class SSVScannerCommand {
       cli && this.progressBar.update(latestBlockNumber - (filters.toBlock - step));
     }
 
-    clusterSnapshot = clusterSnapshot || ['0', '0', '0', '0', '0', false];
+    clusterSnapshot = clusterSnapshot || ['0','0','0','0','0',false];
     return {
       payload: {
         'Owner': this.params.ownerAddress,
