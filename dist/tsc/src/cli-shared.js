@@ -54,15 +54,20 @@ function main() {
             let params = parser.parse_args();
             params.operatorIds = params.operatorIds.split(',')
                 .map((value) => {
-                if (Number.isNaN(+value))
-                    throw new Error('Operator Id should be the number');
-                return +value;
-            });
+                    if (Number.isNaN(+value))
+                        throw new Error('Operator Id should be the number');
+                    return +value;
+                });
             const command = new SSVScannerCommand_1.SSVScannerCommand(params);
             const result = yield command.execute();
             console.table(result.payload);
-            console.log('\CLuster snapshot:');
+            console.log('\Cluster snapshot:');
             console.table(result.cluster);
+console.log(`"raw": {
+    "block": ${result.payload.Block},
+    "cluster snapshot": ${JSON.stringify(result.cluster, null, "\t")},
+    "cluster": [${result.cluster.validatorCount},${result.cluster.networkFee},${result.cluster.networkFeeIndex},${result.cluster.index},${result.cluster.balance},${result.cluster.disabled}]
+}`);
         }
         catch (e) {
             console.error('\x1b[31m', e.message);

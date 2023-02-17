@@ -65,8 +65,13 @@ export default async function main(): Promise<any> {
     const command = new SSVScannerCommand(params);
     const result = await command.execute();
     console.table(result.payload);
-    console.log('\CLuster snapshot:');
+    console.log('\Cluster snapshot:');
     console.table(result.cluster);
+console.log(`"raw": {
+  "block": ${result.payload.Block},
+  "cluster snapshot": ${JSON.stringify(result.cluster, null, "\t")},
+  "cluster": [${result.cluster.validatorCount},${result.cluster.networkFee},${result.cluster.networkFeeIndex},${result.cluster.index},${result.cluster.balance},${result.cluster.disabled}]
+}`);
   } catch (e: any) {
     console.error('\x1b[31m', e.message);
   }
