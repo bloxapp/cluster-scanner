@@ -48,13 +48,8 @@ class SSVScannerCommand {
     getClusterSnapshot(cli) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             let latestBlockNumber
-            try {
-                latestBlockNumber = yield web3_provider_1.default.web3(this.params.nodeUrl).eth.getBlockNumber()
-            }
-            catch (err) {
-                console.log('Could not access the provided node endpoint.')
-                throw new Error()
-            };
+            try { latestBlockNumber = yield web3_provider_1.default.web3(this.params.nodeUrl).eth.getBlockNumber() }
+            catch (err) { throw new Error('Could not access the provided node endpoint.') };
             let step = this.MONTH;
             let clusterSnapshot;
             let biggestBlockNumber = 0;
