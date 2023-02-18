@@ -36,8 +36,10 @@ export class SSVScannerCommand {
     if (!Array.isArray(params_.operatorIds) || !this.isValidOperatorIds(params_.operatorIds.length)) throw Error('Operator ids list is not valid');
     if (!params_.ownerAddress) throw Error('Cluster owner address is required');
     this.params = params_;
-    if (params_.contractAddress.length !== 42 || params_.contractAddress.slice(0, 2) !== '0x') throw Error('Invalid contract address.');
-    if (params_.ownerAddress.length !== 42 || params_.ownerAddress.slice(0, 2) !== '0x') throw Error('Invalid contract address.');
+    if (params_.contractAddress.length !== 42) throw Error('Invalid contract address length.');
+    if (params_.contractAddress.slice(0, 2) !== '0x') throw Error('Invalid contract address.');
+    if (params_.ownerAddress.length !== 42) throw Error('Invalid owner address length.');
+    if (params_.ownerAddress.slice(0, 2) !== '0x') throw Error('Invalid owner address.');
   }
 
   async scan(): Promise<IData> {

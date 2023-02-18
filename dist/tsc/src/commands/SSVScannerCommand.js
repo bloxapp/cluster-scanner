@@ -25,10 +25,14 @@ class SSVScannerCommand {
             throw Error('Invalid operators amount. Enter an 3f+1 compatible amount of operators.');
         if (!params_.ownerAddress)
             throw Error('Cluster owner address is required');
-        if (params_.contractAddress.length !== 42 || params_.contractAddress.slice(0, 2) !== '0x')
+        if (params_.contractAddress.length !== 42)
+            throw Error('Invalid contract address length');
+        if (params_.contractAddress.slice(0, 2) !== '0x')
             throw Error('Invalid contract address');
-        if (params_.ownerAddress.length !== 42 || params_.ownerAddress.slice(0, 2) !== '0x')
-            throw Error('Invalid contract address');
+        if (params_.ownerAddress.length !== 42)
+            throw Error('Invalid owner address length');
+        if (params_.ownerAddress.slice(0, 2) !== '0x')
+            throw Error('Invalid owner address');
         this.params = params_;
     }
     scan() {
