@@ -24,8 +24,7 @@ function main() {
             dest: 'nodeUrl'
         });
         parser.add_argument('-ca', '--ssv-contract-address', {
-            help: 'SSV contract address - see https://docs.ssv.network/developers/smart-contracts' +
-                'Refer to https://docs.ssv.network/developers/smart-contracts',
+            help: 'SSV contract address - see https://docs.ssv.network/developers/smart-contracts',
             required: true,
             dest: 'contractAddress'
         });
