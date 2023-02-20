@@ -54,8 +54,8 @@ yarn cli --help
 **Input parameters:**
 
 - node-url (n) = The ETH1 node url
-- ssv-contract-address (ca) = Keystore password
-- owner-address (op) = Cluster owner address
+- ssv-contract-address (ca) = SSV Network contract address
+- owner-address (oa) = Cluster owner address
 - operator-ids (oids) = Comma separated operator ids list
 
 Example of running in the CLI:
@@ -72,14 +72,20 @@ yarn cli -n .... -ca .... -oa ..... -oids 1,2,3,4
 To run an example of a NodeJS project containing all the code snippets to build the share and transaction payload, simply follow these instructions!
 
 ```bash
-cd examples/node
-npm install
+cd examples
+yarn install
 ```
 
 To run a JavaScript example:
 
 ```bash
-npm run start
+yarn start:js
+```
+
+To run a Typescript example:
+
+```bash
+yarn start
 ```
 
 ## Development

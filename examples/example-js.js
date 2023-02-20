@@ -1,4 +1,4 @@
-const { SSVScannerCommand } = require('../dist/tsc/src/commands/SSVScannerCommand');
+const { SSVScannerCommand } = require('../src/main');
 
 async function main() {
   const params = {
