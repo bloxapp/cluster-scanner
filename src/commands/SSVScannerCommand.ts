@@ -121,7 +121,7 @@ export class SSVScannerCommand {
       filters.fromBlock = filters.toBlock - step;
       cli && this.progressBar.update(latestBlockNumber - (filters.toBlock - step));
     }
-    cli && this.progressBar.start(latestBlockNumber, latestBlockNumber);
+    cli && this.progressBar.update(latestBlockNumber, latestBlockNumber);
 
     clusterSnapshot = clusterSnapshot || ['0', '0', '0', '0', '0', false];
     return {
