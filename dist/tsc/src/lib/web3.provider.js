@@ -4,7 +4,7 @@ const tslib_1 = require("tslib");
 const web3_1 = tslib_1.__importDefault(require("web3"));
 const v3_abi_json_1 = tslib_1.__importDefault(require("../shared/v3.abi.json"));
 class Web3Provider {
-    static web3(nodeUrl) {
+    static web3(nodeUrl = '') {
         return new web3_1.default(nodeUrl);
     }
     static get abi() {
