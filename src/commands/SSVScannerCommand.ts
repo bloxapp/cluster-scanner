@@ -77,17 +77,22 @@ export class SSVScannerCommand {
       latestBlockNumber = await Web3Provider.web3(this.params.nodeUrl).eth.getBlockNumber(); 
     } catch (err) {
       throw new Error('Could not access the provided node endpoint.');
-    };
+    }
+    try {
+      await Web3Provider.contract(this.params.nodeUrl, this.params.contractAddress).methods.owner().call();
+      // HERE we can validate the contract owner address
+    } catch (err) {
+      throw new Error('The provided contract address is not valid.');
+    }
     let step = this.MONTH;
     let clusterSnapshot;
     let biggestBlockNumber = 0;
 
+    const ownerTopic = Web3Provider.web3().eth.abi.encodeParameter('address', this.params.ownerAddress);
     const filters = {
       fromBlock: latestBlockNumber - step,
       toBlock: latestBlockNumber,
-      filter: {
-        owner: this.params.ownerAddress,
-      }
+      topics: [null, ownerTopic],
     };
 
     cli && this.progressBar.start(latestBlockNumber, 0);
@@ -116,6 +121,7 @@ export class SSVScannerCommand {
       filters.fromBlock = filters.toBlock - step;
       cli && this.progressBar.update(latestBlockNumber - (filters.toBlock - step));
     }
+    cli && this.progressBar.start(latestBlockNumber, latestBlockNumber);
 
     clusterSnapshot = clusterSnapshot || ['0', '0', '0', '0', '0', false];
     return {
