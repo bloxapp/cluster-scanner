@@ -30,16 +30,33 @@ export class SSVScannerCommand {
 
   private params: SSVScannerParams;
 
-  constructor(params_: SSVScannerParams) {
-    if (!params_.contractAddress) throw Error('Contract address is required');
-    if (!params_.nodeUrl) throw Error('ETH1 node is required');
-    if (!Array.isArray(params_.operatorIds) || !this.isValidOperatorIds(params_.operatorIds.length)) throw Error('Operator ids list is not valid');
-    if (!params_.ownerAddress) throw Error('Cluster owner address is required');
-    this.params = params_;
-    if (params_.contractAddress.length !== 42) throw Error('Invalid contract address length.');
-    if (!params_.contractAddress.startsWith('0x')) throw Error('Invalid contract address.');
-    if (params_.ownerAddress.length !== 42) throw Error('Invalid owner address length.');
-    if (!params_.ownerAddress.startsWith('0x')) throw Error('Invalid owner address.');
+  constructor(scannerParams: SSVScannerParams) {
+    if (!scannerParams.contractAddress) {
+      throw Error('Contract address is required');
+    }
+    if (!scannerParams.nodeUrl) {
+      throw Error('ETH1 node is required');
+    }
+    const validOperatorIds = Array.isArray(scannerParams.operatorIds) && this.isValidOperatorIds(scannerParams.operatorIds.length);
+    if (!validOperatorIds) {
+      throw Error('Operator ids list is not valid');
+    }
+    if (!scannerParams.ownerAddress) {
+      throw Error('Cluster owner address is required');
+    }
+    if (scannerParams.contractAddress.length !== 42) {
+      throw Error('Invalid contract address length.');
+    }
+    if (!scannerParams.contractAddress.startsWith('0x')) {
+      throw Error('Invalid contract address.');
+    }
+    if (scannerParams.ownerAddress.length !== 42) {
+      throw Error('Invalid owner address length.');
+    }
+    if (!scannerParams.ownerAddress.startsWith('0x')) {
+      throw Error('Invalid owner address.');
+    }
+    this.params = scannerParams;
   }
 
   async scan(): Promise<IData> {
@@ -56,8 +73,11 @@ export class SSVScannerCommand {
 
   async getClusterSnapshot(cli: boolean): Promise<IData> {
     let latestBlockNumber;
-    try { latestBlockNumber = await Web3Provider.web3(this.params.nodeUrl).eth.getBlockNumber(); }
-    catch (err) { throw new Error('Could not access the provided node endpoint.') };
+    try { 
+      latestBlockNumber = await Web3Provider.web3(this.params.nodeUrl).eth.getBlockNumber(); 
+    } catch (err) {
+      throw new Error('Could not access the provided node endpoint.');
+    };
     let step = this.MONTH;
     let clusterSnapshot;
     let biggestBlockNumber = 0;
