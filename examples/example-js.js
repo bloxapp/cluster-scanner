@@ -9,11 +9,11 @@ async function main() {
   }
   const command = new SSVScannerCommand(params);
   const result = await command.scan()
-  console.log(`{
-    "block": ${result.payload.Block},
-    "cluster snapshot": ${JSON.stringify(result.cluster, null, "\t")},
-    "cluster": [${Object.values(result.cluster)}}]
-}`);
+  console.log(JSON.stringify({
+    "block": result.payload.Block,
+    "cluster snapshot": result.cluster,
+    "cluster": Object.values(result.cluster)
+  }, null, '  '))
 }
 
 void main();

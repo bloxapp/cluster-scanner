@@ -41,8 +41,8 @@ export default async function main(): Promise<any> {
     dest: 'operatorIds'
   });
 
-  
-  const messageText = `Cluster Scanner`;
+
+  const messageText = `Cluster Scanner v${pkg.version}`;
   const message = await FigletMessage(messageText);
   if (message) {
     console.log(' -----------------------------------------------------------------------------------');
@@ -67,11 +67,11 @@ export default async function main(): Promise<any> {
     console.table(result.payload);
     console.log('\Cluster snapshot:');
     console.table(result.cluster);
-console.log(`"raw": {
-  "block": ${result.payload.Block},
-  "cluster snapshot": ${JSON.stringify(result.cluster, null, "\t")},
-  "cluster": [${Object.values(result.cluster)}]
-}`);
+    console.log(JSON.stringify({
+      "block": result.payload.Block,
+      "cluster snapshot": result.cluster,
+      "cluster": Object.values(result.cluster)
+    }, null, '  '));
   } catch (e: any) {
     console.error('\x1b[31m', e.message);
   }

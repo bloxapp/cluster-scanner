@@ -62,11 +62,11 @@ function main() {
             console.table(result.payload);
             console.log('\Cluster snapshot:');
             console.table(result.cluster);
-console.log(`"raw": {
-    "block": ${result.payload.Block},
-    "cluster snapshot": ${JSON.stringify(result.cluster, null, "\t")},
-    "cluster": [${Object.values(result.cluster)}]
-}`);
+            console.log(JSON.stringify({
+                "block": result.payload.Block,
+                "cluster snapshot": result.cluster,
+                "cluster": Object.values(result.cluster)
+            }, null, '  '))
         }
         catch (e) {
             console.error('\x1b[31m', e.message);

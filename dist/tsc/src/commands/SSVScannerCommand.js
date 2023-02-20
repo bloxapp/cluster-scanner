@@ -27,11 +27,11 @@ class SSVScannerCommand {
             throw Error('Cluster owner address is required');
         if (params_.contractAddress.length !== 42)
             throw Error('Invalid contract address length');
-        if (params_.contractAddress.slice(0, 2) !== '0x')
+        if (!params_.contractAddress.startsWith('0x'))
             throw Error('Invalid contract address');
         if (params_.ownerAddress.length !== 42)
             throw Error('Invalid owner address length');
-        if (params_.ownerAddress.slice(0, 2) !== '0x')
+        if (!params_.ownerAddress.startsWith('0x'))
             throw Error('Invalid owner address');
         this.params = params_;
     }
@@ -51,7 +51,7 @@ class SSVScannerCommand {
     }
     getClusterSnapshot(cli) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
-            let latestBlockNumber
+            let latestBlockNumber;
             try { latestBlockNumber = yield web3_provider_1.default.web3(this.params.nodeUrl).eth.getBlockNumber() }
             catch (err) { throw new Error('Could not access the provided node endpoint.') };
             let step = this.MONTH;

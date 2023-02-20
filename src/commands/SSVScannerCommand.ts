@@ -37,9 +37,9 @@ export class SSVScannerCommand {
     if (!params_.ownerAddress) throw Error('Cluster owner address is required');
     this.params = params_;
     if (params_.contractAddress.length !== 42) throw Error('Invalid contract address length.');
-    if (params_.contractAddress.slice(0, 2) !== '0x') throw Error('Invalid contract address.');
+    if (!params_.contractAddress.startsWith('0x')) throw Error('Invalid contract address.');
     if (params_.ownerAddress.length !== 42) throw Error('Invalid owner address length.');
-    if (params_.ownerAddress.slice(0, 2) !== '0x') throw Error('Invalid owner address.');
+    if (!params_.ownerAddress.startsWith('0x')) throw Error('Invalid owner address.');
   }
 
   async scan(): Promise<IData> {
@@ -55,7 +55,7 @@ export class SSVScannerCommand {
   }
 
   async getClusterSnapshot(cli: boolean): Promise<IData> {
-    let latestBlockNumber
+    let latestBlockNumber;
     try { latestBlockNumber = await Web3Provider.web3(this.params.nodeUrl).eth.getBlockNumber(); }
     catch (err) { throw new Error('Could not access the provided node endpoint.') };
     let step = this.MONTH;
@@ -97,7 +97,7 @@ export class SSVScannerCommand {
       cli && this.progressBar.update(latestBlockNumber - (filters.toBlock - step));
     }
 
-    clusterSnapshot = clusterSnapshot || ['0','0','0','0','0',false];
+    clusterSnapshot = clusterSnapshot || ['0', '0', '0', '0', '0', false];
     return {
       payload: {
         'Owner': this.params.ownerAddress,
