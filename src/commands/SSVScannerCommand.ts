@@ -30,12 +30,33 @@ export class SSVScannerCommand {
 
   private params: SSVScannerParams;
 
-  constructor(params_: SSVScannerParams) {
-    if (!params_.contractAddress) throw Error('Contract address is required');
-    if (!params_.nodeUrl) throw Error('ETH1 node is required');
-    if (!Array.isArray(params_.operatorIds) || !this.isValidOperatorIds(params_.operatorIds.length)) throw Error('Operator ids list is not valid');
-    if (!params_.ownerAddress) throw Error('Cluster owner address is required');
-    this.params = params_;
+  constructor(scannerParams: SSVScannerParams) {
+    if (!scannerParams.contractAddress) {
+      throw Error('Contract address is required');
+    }
+    if (!scannerParams.nodeUrl) {
+      throw Error('ETH1 node is required');
+    }
+    const validOperatorIds = Array.isArray(scannerParams.operatorIds) && this.isValidOperatorIds(scannerParams.operatorIds.length);
+    if (!validOperatorIds) {
+      throw Error('Operator ids list is not valid');
+    }
+    if (!scannerParams.ownerAddress) {
+      throw Error('Cluster owner address is required');
+    }
+    if (scannerParams.contractAddress.length !== 42) {
+      throw Error('Invalid contract address length.');
+    }
+    if (!scannerParams.contractAddress.startsWith('0x')) {
+      throw Error('Invalid contract address.');
+    }
+    if (scannerParams.ownerAddress.length !== 42) {
+      throw Error('Invalid owner address length.');
+    }
+    if (!scannerParams.ownerAddress.startsWith('0x')) {
+      throw Error('Invalid owner address.');
+    }
+    this.params = scannerParams;
   }
 
   async scan(): Promise<IData> {
@@ -51,7 +72,12 @@ export class SSVScannerCommand {
   }
 
   async getClusterSnapshot(cli: boolean): Promise<IData> {
-    let latestBlockNumber = await Web3Provider.web3(this.params.nodeUrl).eth.getBlockNumber();
+    let latestBlockNumber;
+    try { 
+      latestBlockNumber = await Web3Provider.web3(this.params.nodeUrl).eth.getBlockNumber(); 
+    } catch (err) {
+      throw new Error('Could not access the provided node endpoint.');
+    };
     let step = this.MONTH;
     let clusterSnapshot;
     let biggestBlockNumber = 0;
@@ -70,16 +96,16 @@ export class SSVScannerCommand {
       try {
         result = await Web3Provider.contract(this.params.nodeUrl, this.params.contractAddress).getPastEvents('allEvents', filters);
         result
-        .filter((item: any) => this.eventsList.includes(item.event))
-        .filter((item: any) => JSON.stringify(item.returnValues.operatorIds.map((value: any) => +value)) === JSON.stringify(this.params.operatorIds))
-        .forEach((item: any) => {
-          if (item.blockNumber > biggestBlockNumber) {
-            biggestBlockNumber = item.blockNumber;
-            clusterSnapshot = item.returnValues.cluster;
-          }
-        });
+          .filter((item: any) => this.eventsList.includes(item.event))
+          .filter((item: any) => JSON.stringify(item.returnValues.operatorIds.map((value: any) => +value)) === JSON.stringify(this.params.operatorIds))
+          .forEach((item: any) => {
+            if (item.blockNumber > biggestBlockNumber) {
+              biggestBlockNumber = item.blockNumber;
+              clusterSnapshot = item.returnValues.cluster;
+            }
+          });
         filters.toBlock = filters.fromBlock;
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         if (step === this.MONTH) {
           step = this.WEEK;
@@ -87,17 +113,17 @@ export class SSVScannerCommand {
           step = this.DAY;
         }
       }
-      filters.fromBlock = filters.toBlock - step;  
-      cli && this.progressBar.update(latestBlockNumber - (filters.toBlock - step));  
+      filters.fromBlock = filters.toBlock - step;
+      cli && this.progressBar.update(latestBlockNumber - (filters.toBlock - step));
     }
 
-    clusterSnapshot = clusterSnapshot || ['0','0','0','0','0',false];
+    clusterSnapshot = clusterSnapshot || ['0', '0', '0', '0', '0', false];
     return {
       payload: {
         'Owner': this.params.ownerAddress,
         'Operators': this.params.operatorIds.join(','),
         'Block': biggestBlockNumber || latestBlockNumber,
-        'Data': clusterSnapshot.join(','),  
+        'Data': clusterSnapshot.join(','),
       },
       cluster: {
         validatorCount: clusterSnapshot[0],

@@ -22,9 +22,17 @@ class SSVScannerCommand {
         if (!params_.nodeUrl)
             throw Error('ETH1 node is required');
         if (!Array.isArray(params_.operatorIds) || !this.isValidOperatorIds(params_.operatorIds.length))
-            throw Error('Operator ids list is not valid');
+            throw Error('Invalid operators amount. Enter an 3f+1 compatible amount of operators.');
         if (!params_.ownerAddress)
             throw Error('Cluster owner address is required');
+        if (params_.contractAddress.length !== 42)
+            throw Error('Invalid contract address length');
+        if (!params_.contractAddress.startsWith('0x'))
+            throw Error('Invalid contract address');
+        if (params_.ownerAddress.length !== 42)
+            throw Error('Invalid owner address length');
+        if (!params_.ownerAddress.startsWith('0x'))
+            throw Error('Invalid owner address');
         this.params = params_;
     }
     scan() {
@@ -43,7 +51,9 @@ class SSVScannerCommand {
     }
     getClusterSnapshot(cli) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
-            let latestBlockNumber = yield web3_provider_1.default.web3(this.params.nodeUrl).eth.getBlockNumber();
+            let latestBlockNumber;
+            try { latestBlockNumber = yield web3_provider_1.default.web3(this.params.nodeUrl).eth.getBlockNumber() }
+            catch (err) { throw new Error('Could not access the provided node endpoint.') };
             let step = this.MONTH;
             let clusterSnapshot;
             let biggestBlockNumber = 0;
@@ -63,11 +73,11 @@ class SSVScannerCommand {
                         .filter((item) => this.eventsList.includes(item.event))
                         .filter((item) => JSON.stringify(item.returnValues.operatorIds.map((value) => +value)) === JSON.stringify(this.params.operatorIds))
                         .forEach((item) => {
-                        if (item.blockNumber > biggestBlockNumber) {
-                            biggestBlockNumber = item.blockNumber;
-                            clusterSnapshot = item.returnValues.cluster;
-                        }
-                    });
+                            if (item.blockNumber > biggestBlockNumber) {
+                                biggestBlockNumber = item.blockNumber;
+                                clusterSnapshot = item.returnValues.cluster;
+                            }
+                        });
                     filters.toBlock = filters.fromBlock;
                 }
                 catch (e) {

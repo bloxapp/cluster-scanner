@@ -1,7 +1,7 @@
 {
   "name": "cluster-scanner",
   "version": "0.0.2",
-  "description": "Library to find the latest validators cluster snapshot in the SSV Contract.",
+  "description": "Library to retrieve cluster snapshots from the ssv.network contract.",
   "author": "SSV.Network",
   "repository": "https://github.com/bloxapp/cluster-scanner",
   "license": "MIT",
