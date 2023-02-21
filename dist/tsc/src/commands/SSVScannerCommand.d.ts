@@ -15,7 +15,7 @@ export declare class SSVScannerCommand {
     protected progressBar: any;
     protected eventsList: string[];
     private params;
-    constructor(params_: SSVScannerParams);
+    constructor(scannerParams: SSVScannerParams);
     scan(): Promise<IData>;
     execute(): Promise<IData>;
     getClusterSnapshot(cli: boolean): Promise<IData>;
