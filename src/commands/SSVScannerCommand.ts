@@ -79,6 +79,7 @@ export class SSVScannerCommand {
       throw new Error('Could not access the provided node endpoint.');
     }
     try {
+      this.params.contractAddress = Web3Provider.web3().utils.toChecksumAddress(this.params.contractAddress);
       await Web3Provider.contract(this.params.nodeUrl, this.params.contractAddress).methods.owner().call();
       // HERE we can validate the contract owner address
     } catch (err) {
