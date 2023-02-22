@@ -43,6 +43,9 @@ class SSVScannerCommand {
             throw Error('Invalid owner address.');
         }
         this.params = scannerParams;
+        // convert to checksum addresses
+        this.params.contractAddress = web3_provider_1.default.web3().utils.toChecksumAddress(this.params.contractAddress);
+        this.params.ownerAddress = web3_provider_1.default.web3().utils.toChecksumAddress(this.params.ownerAddress);
     }
     scan() {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
@@ -68,7 +71,6 @@ class SSVScannerCommand {
                 throw new Error('Could not access the provided node endpoint.');
             }
             try {
-                this.params.contractAddress = web3_provider_1.default.web3().utils.toChecksumAddress(this.params.contractAddress);
                 yield web3_provider_1.default.contract(this.params.nodeUrl, this.params.contractAddress).methods.owner().call();
                 // HERE we can validate the contract owner address
             }
