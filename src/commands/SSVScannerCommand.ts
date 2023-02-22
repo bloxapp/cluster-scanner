@@ -39,7 +39,7 @@ export class SSVScannerCommand {
     }
     const validOperatorIds = Array.isArray(scannerParams.operatorIds) && this.isValidOperatorIds(scannerParams.operatorIds.length);
     if (!validOperatorIds) {
-      throw Error('Operator ids list is not valid');
+      throw Error('Comma-separated list of operator IDs. The amount must be 3f+1 compatible.');
     }
     if (!scannerParams.ownerAddress) {
       throw Error('Cluster owner address is required');
@@ -82,7 +82,7 @@ export class SSVScannerCommand {
       await Web3Provider.contract(this.params.nodeUrl, this.params.contractAddress).methods.owner().call();
       // HERE we can validate the contract owner address
     } catch (err) {
-      throw new Error('The provided contract address is not valid.');
+      throw new Error('Could not find any cluster snapshot from the provided contract address.');
     }
     let step = this.MONTH;
     let clusterSnapshot;
