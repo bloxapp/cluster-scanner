@@ -86,6 +86,11 @@
   },
   {
       "inputs": [],
+      "name": "SameFeeChangeNotAllowed",
+      "type": "error"
+  },
+  {
+      "inputs": [],
       "name": "TokenTransferFailed",
       "type": "error"
   },
@@ -107,6 +112,11 @@
   {
       "inputs": [],
       "name": "ValidatorOwnedByOtherAddress",
+      "type": "error"
+  },
+  {
+      "inputs": [],
+      "name": "ZeroFeeIncreaseNotAllowed",
       "type": "error"
   },
   {
@@ -171,11 +181,6 @@
                   },
                   {
                       "internalType": "uint64",
-                      "name": "networkFee",
-                      "type": "uint64"
-                  },
-                  {
-                      "internalType": "uint64",
                       "name": "networkFeeIndex",
                       "type": "uint64"
                   },
@@ -191,7 +196,7 @@
                   },
                   {
                       "internalType": "bool",
-                      "name": "disabled",
+                      "name": "active",
                       "type": "bool"
                   }
               ],
@@ -228,11 +233,6 @@
                   },
                   {
                       "internalType": "uint64",
-                      "name": "networkFee",
-                      "type": "uint64"
-                  },
-                  {
-                      "internalType": "uint64",
                       "name": "networkFeeIndex",
                       "type": "uint64"
                   },
@@ -248,7 +248,7 @@
                   },
                   {
                       "internalType": "bool",
-                      "name": "disabled",
+                      "name": "active",
                       "type": "bool"
                   }
               ],
@@ -285,11 +285,6 @@
                   },
                   {
                       "internalType": "uint64",
-                      "name": "networkFee",
-                      "type": "uint64"
-                  },
-                  {
-                      "internalType": "uint64",
                       "name": "networkFeeIndex",
                       "type": "uint64"
                   },
@@ -305,7 +300,7 @@
                   },
                   {
                       "internalType": "bool",
-                      "name": "disabled",
+                      "name": "active",
                       "type": "bool"
                   }
               ],
@@ -348,11 +343,6 @@
                   },
                   {
                       "internalType": "uint64",
-                      "name": "networkFee",
-                      "type": "uint64"
-                  },
-                  {
-                      "internalType": "uint64",
                       "name": "networkFeeIndex",
                       "type": "uint64"
                   },
@@ -368,7 +358,7 @@
                   },
                   {
                       "internalType": "bool",
-                      "name": "disabled",
+                      "name": "active",
                       "type": "bool"
                   }
               ],
@@ -537,7 +527,7 @@
               "type": "uint64"
           }
       ],
-      "name": "OperatorFeeCancelationDeclared",
+      "name": "OperatorFeeCancellationDeclared",
       "type": "event"
   },
   {
@@ -740,11 +730,6 @@
                   },
                   {
                       "internalType": "uint64",
-                      "name": "networkFee",
-                      "type": "uint64"
-                  },
-                  {
-                      "internalType": "uint64",
                       "name": "networkFeeIndex",
                       "type": "uint64"
                   },
@@ -760,7 +745,7 @@
                   },
                   {
                       "internalType": "bool",
-                      "name": "disabled",
+                      "name": "active",
                       "type": "bool"
                   }
               ],
@@ -803,11 +788,6 @@
                   },
                   {
                       "internalType": "uint64",
-                      "name": "networkFee",
-                      "type": "uint64"
-                  },
-                  {
-                      "internalType": "uint64",
                       "name": "networkFeeIndex",
                       "type": "uint64"
                   },
@@ -823,7 +803,7 @@
                   },
                   {
                       "internalType": "bool",
-                      "name": "disabled",
+                      "name": "active",
                       "type": "bool"
                   }
               ],
@@ -886,30 +866,13 @@
           },
           {
               "internalType": "uint64",
-              "name": "withdrawn",
+              "name": "balance",
               "type": "uint64"
           },
           {
-              "components": [
-                  {
-                      "internalType": "uint64",
-                      "name": "block",
-                      "type": "uint64"
-                  },
-                  {
-                      "internalType": "uint64",
-                      "name": "index",
-                      "type": "uint64"
-                  },
-                  {
-                      "internalType": "uint64",
-                      "name": "balance",
-                      "type": "uint64"
-                  }
-              ],
-              "internalType": "struct ISSVNetworkCore.Snapshot",
-              "name": "earnings",
-              "type": "tuple"
+              "internalType": "uint64",
+              "name": "block",
+              "type": "uint64"
           }
       ],
       "stateMutability": "view",
@@ -972,11 +935,6 @@
                   },
                   {
                       "internalType": "uint64",
-                      "name": "networkFee",
-                      "type": "uint64"
-                  },
-                  {
-                      "internalType": "uint64",
                       "name": "networkFeeIndex",
                       "type": "uint64"
                   },
@@ -992,7 +950,7 @@
                   },
                   {
                       "internalType": "bool",
-                      "name": "disabled",
+                      "name": "active",
                       "type": "bool"
                   }
               ],
@@ -1091,11 +1049,6 @@
                   },
                   {
                       "internalType": "uint64",
-                      "name": "networkFee",
-                      "type": "uint64"
-                  },
-                  {
-                      "internalType": "uint64",
                       "name": "networkFeeIndex",
                       "type": "uint64"
                   },
@@ -1111,7 +1064,7 @@
                   },
                   {
                       "internalType": "bool",
-                      "name": "disabled",
+                      "name": "active",
                       "type": "bool"
                   }
               ],
@@ -1314,11 +1267,6 @@
                   },
                   {
                       "internalType": "uint64",
-                      "name": "networkFee",
-                      "type": "uint64"
-                  },
-                  {
-                      "internalType": "uint64",
                       "name": "networkFeeIndex",
                       "type": "uint64"
                   },
@@ -1334,7 +1282,7 @@
                   },
                   {
                       "internalType": "bool",
-                      "name": "disabled",
+                      "name": "active",
                       "type": "bool"
                   }
               ],
@@ -1386,7 +1334,7 @@
           },
           {
               "internalType": "bytes",
-              "name": "sharesEncrypted",
+              "name": "shares",
               "type": "bytes"
           },
           {
@@ -1400,11 +1348,6 @@
                       "internalType": "uint32",
                       "name": "validatorCount",
                       "type": "uint32"
-                  },
-                  {
-                      "internalType": "uint64",
-                      "name": "networkFee",
-                      "type": "uint64"
                   },
                   {
                       "internalType": "uint64",
@@ -1423,7 +1366,7 @@
                   },
                   {
                       "internalType": "bool",
-                      "name": "disabled",
+                      "name": "active",
                       "type": "bool"
                   }
               ],
@@ -1441,7 +1384,7 @@
       "inputs": [
           {
               "internalType": "uint64",
-              "name": "id",
+              "name": "operatorId",
               "type": "uint64"
           }
       ],
@@ -1471,11 +1414,6 @@
                   },
                   {
                       "internalType": "uint64",
-                      "name": "networkFee",
-                      "type": "uint64"
-                  },
-                  {
-                      "internalType": "uint64",
                       "name": "networkFeeIndex",
                       "type": "uint64"
                   },
@@ -1491,7 +1429,7 @@
                   },
                   {
                       "internalType": "bool",
-                      "name": "disabled",
+                      "name": "active",
                       "type": "bool"
                   }
               ],
@@ -1681,11 +1619,6 @@
                   },
                   {
                       "internalType": "uint64",
-                      "name": "networkFee",
-                      "type": "uint64"
-                  },
-                  {
-                      "internalType": "uint64",
                       "name": "networkFeeIndex",
                       "type": "uint64"
                   },
@@ -1701,7 +1634,7 @@
                   },
                   {
                       "internalType": "bool",
-                      "name": "disabled",
+                      "name": "active",
                       "type": "bool"
                   }
               ],
