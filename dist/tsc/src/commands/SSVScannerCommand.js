@@ -125,11 +125,10 @@ class SSVScannerCommand {
                 },
                 cluster: {
                     validatorCount: clusterSnapshot[0],
-                    networkFee: clusterSnapshot[1],
-                    networkFeeIndex: clusterSnapshot[2],
-                    index: clusterSnapshot[3],
-                    balance: clusterSnapshot[4],
-                    disabled: clusterSnapshot[5],
+                    networkFeeIndex: clusterSnapshot[1],
+                    index: clusterSnapshot[2],
+                    balance: clusterSnapshot[3],
+                    active: clusterSnapshot[4],
                 }
             };
         });
