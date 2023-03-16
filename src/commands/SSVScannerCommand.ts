@@ -60,6 +60,7 @@ export class SSVScannerCommand {
     // convert to checksum addresses
     this.params.contractAddress = Web3Provider.web3().utils.toChecksumAddress(this.params.contractAddress);
     this.params.ownerAddress = Web3Provider.web3().utils.toChecksumAddress(this.params.ownerAddress);
+    this.params.operatorIds = [...this.params.operatorIds].sort((a: number, b: number) => a - b);
   }
 
   async scan(): Promise<IData> {

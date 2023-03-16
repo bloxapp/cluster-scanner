@@ -46,6 +46,7 @@ class SSVScannerCommand {
         // convert to checksum addresses
         this.params.contractAddress = web3_provider_1.default.web3().utils.toChecksumAddress(this.params.contractAddress);
         this.params.ownerAddress = web3_provider_1.default.web3().utils.toChecksumAddress(this.params.ownerAddress);
+        this.params.operatorIds = [...this.params.operatorIds].sort((a, b) => a - b);
     }
     scan() {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
