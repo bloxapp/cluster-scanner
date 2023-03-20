@@ -77,8 +77,8 @@ export class SSVScannerCommand {
 
   async getClusterSnapshot(cli: boolean): Promise<IData> {
     let latestBlockNumber;
-    try { 
-      latestBlockNumber = await Web3Provider.web3(this.params.nodeUrl).eth.getBlockNumber(); 
+    try {
+      latestBlockNumber = await Web3Provider.web3(this.params.nodeUrl).eth.getBlockNumber();
     } catch (err) {
       throw new Error('Could not access the provided node endpoint.');
     }
@@ -131,7 +131,7 @@ export class SSVScannerCommand {
     return {
       payload: {
         'Owner': this.params.ownerAddress,
-        'Operators': this.params.operatorIds.join(','),
+        'Operators': this.params.operatorIds.sort((a: number, b: number) => a - b).join(','),
         'Block': biggestBlockNumber || latestBlockNumber,
         'Data': clusterSnapshot.join(','),
       },

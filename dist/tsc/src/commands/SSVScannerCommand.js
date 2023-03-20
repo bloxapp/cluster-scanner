@@ -120,7 +120,7 @@ class SSVScannerCommand {
             return {
                 payload: {
                     'Owner': this.params.ownerAddress,
-                    'Operators': this.params.operatorIds.join(','),
+                    'Operators': this.params.operatorIds.sort((a, b) => a - b).join(','),
                     'Block': biggestBlockNumber || latestBlockNumber,
                     'Data': clusterSnapshot.join(','),
                 },

@@ -57,7 +57,8 @@ function main() {
                 if (Number.isNaN(+value))
                     throw new Error('Operator Id should be the number');
                 return +value;
-            });
+            })
+                .sort((a, b) => a - b);
             const command = new SSVScannerCommand_1.SSVScannerCommand(params);
             const result = yield command.execute();
             console.table(result.payload);

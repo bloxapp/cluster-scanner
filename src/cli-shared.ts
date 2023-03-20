@@ -60,7 +60,8 @@ export default async function main(): Promise<any> {
       .map((value: any) => {
         if (Number.isNaN(+value)) throw new Error('Operator Id should be the number');
         return +value;
-      });
+      })
+      .sort((a: number, b: number) => a - b);
 
     const command = new SSVScannerCommand(params);
     const result = await command.execute();
