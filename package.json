@@ -1,6 +1,6 @@
 {
   "name": "cluster-scanner",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Library to retrieve cluster snapshots from the ssv.network contract.",
   "author": "SSV.Network",
   "repository": "https://github.com/bloxapp/cluster-scanner",
