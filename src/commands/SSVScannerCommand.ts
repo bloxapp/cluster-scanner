@@ -127,7 +127,7 @@ export class SSVScannerCommand {
     }
     cli && this.progressBar.update(latestBlockNumber, latestBlockNumber);
 
-    clusterSnapshot = clusterSnapshot || ['0', '0', '0', '0', '0'];
+    clusterSnapshot = clusterSnapshot || ['0', '0', '0', '0', '1'];
     return {
       payload: {
         'Owner': this.params.ownerAddress,
