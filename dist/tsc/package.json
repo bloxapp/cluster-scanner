@@ -1,5 +1,5 @@
 {
-    "name": "cluster-scanner",
+    "name": "ssv-cluster-scanner",
     "version": "0.1.6",
     "description": "Library to retrieve cluster snapshots from the ssv.network contract.",
     "author": "SSV.Network",
